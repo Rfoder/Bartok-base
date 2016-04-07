@@ -326,6 +326,22 @@ public class Utils : MonoBehaviour {
 	static public float Bezier( float u, params float[] vecs ) {
 		return( Bezier( u, new List<float>(vecs) ) );
 	}
+	//Quaternion added not in Gibson's Book.
+	static public Quaternion Bezier (float u, List<Quaternion> qList)
+	{
+		if (qList.Count == 1) {
+			return (qList[0]);
+		}
+
+		List<Quaternion> qListR = qList.GetRange (1, qList.Count - 1);
+		List<Quaternion> qListL = qList.GetRange (1, qList.Count - 1);
+		Quaternion res = Quaternion.Lerp (Bezier (u, qListL), Bezier (u, qListR), u);
+		return(res);
+	}
+	static public Quaternion Bezier(float u, params Quaternion[] quants)
+	{
+		return(Bezier(u , new List<Quaternion> (quants)));
+	}
 
 
 	

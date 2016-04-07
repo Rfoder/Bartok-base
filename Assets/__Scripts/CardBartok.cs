@@ -29,9 +29,16 @@ public class CardBartok : Card {
 	public List<Quaternion> bezierRots;
 	public float 			timeStart,timeDuration;
 
+	public int 				eventualSortOrder;
+	public string 			eventualSortLayer;
+
 
 	public GameObject		reportFinishTo = null;
+	public Player 			callbackPlayer = null;
 
+	void Awake() {
+		callbackPlayer = null;
+		}
 
 	public void MoveTo(Vector3 ePos, Quaternion eRot) {
 
@@ -96,6 +103,10 @@ public class CardBartok : Card {
 
 
 					reportFinishTo = null;
+				} else if (callbackPlayer != null) {
+					callbackPlayer.CBCallback(this);
+					callbackPlayer = null;
+				
 				} else {
 					// do nothing
 				}
@@ -106,9 +117,24 @@ public class CardBartok : Card {
 				Quaternion rotQ = Utils.Bezier(uC, bezierRots);
 				transform.rotation = rotQ;
 
+				if (u>0.5f && spriteRenderers[0].sortingOrder !=
+				    eventualSortOrder) {
+							
+					SetSortOrder(eventualSortOrder);
+				}
+				if (u>0.75f && spriteRenderers[0].sortingLayerName !=
+				    eventualSortLayer) {
+
+					SetSortingLayerName(eventualSortLayer);
+				}
 			}
 			break;
 		}
 	}
+
+	override public void OnMouseUpAsButton() {
+		Bartok.S.CardClicked (this);
+		base.OnMouseUpAsButton ();
+		}
 
 }

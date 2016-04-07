@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 // The SlotDef class is not a subclass of MonoBehaviour, so it doesn't need a
 // separate C# file.
+/*
 [System.Serializable] // This makes SlotDefs visible in the Unity Inspector pane
 public class SlotDef {
 	public float x;
@@ -82,3 +83,4 @@ public class Layout : MonoBehaviour {
 		}
 	}
 }
+*/
