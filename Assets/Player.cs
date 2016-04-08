@@ -103,7 +103,7 @@ public class Player{
 			hand[i].faceUp = (type == PlayerType.human);
 
 
-			hand[i].SetSortOrder(i*4);
+			//hand[i].SetSortOrder(i*4);
 
 			hand[i].eventualSortOrder = i*4;
 				}
