@@ -286,6 +286,7 @@ public class Bartok : MonoBehaviour {
 				GTRoundResult.guiText.text = "Player "+CURRENT_PLAYER.playerNum
 					+ " won";
 		}
+			GTGameOver.SetActive(true);
 			GTRoundResult.SetActive(true);
 			phase = TurnPhase.gameOver;
 			Invoke("RestartGame", 1);
