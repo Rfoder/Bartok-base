@@ -269,7 +269,32 @@ public class Bartok : MonoBehaviour {
 			List<Card> cards = new List<Card>();
 			foreach (CardBartok cb in discardPile) {
 				cards.Add (cb);
-			}//pg. 654
+			}
+			discardPile.Clear();
+			Deck.Shuffle( ref cards );
+			drawPile =  UpgradeCardsList(cards);
+			ArrangeDrawpile();
 				}
+
+		if (CURRENT_PLAYER.hand.Count == 0) {
+
+			if (CURRENT_PLAYER.type == PlayerType.human){
+				GTGameOver.guiText.text = "You Won!";
+				GTRoundResult.guiText.text = "";
+			} else {
+				GTGameOver.guiText.text = "Game Over";
+				GTRoundResult.guiText.text = "Player "+CURRENT_PLAYER.playerNum
+					+ " won";
+		}
+			GTRoundResult.SetActive(true);
+			phase = TurnPhase.gameOver;
+			Invoke("RestartGame", 1);
+			return(true);
+	}
+		return(false);
+}
+	public void RestartGame() {
+		CURRENT_PLAYER = null;
+		Application.LoadLevel ("__Prospector_Scene_0");
 	}
 }
