@@ -103,13 +103,17 @@ public class CardBartok : Card {
 
 
 					reportFinishTo = null;
+
+				
 				} else if (callbackPlayer != null) {
 					callbackPlayer.CBCallback(this);
 					callbackPlayer = null;
 				
-				} else {
-					// do nothing
+				 
+			} else {
+
 				}
+
 			} else {
 
 				Vector3 pos = Utils.Bezier(uC, bezierPts);

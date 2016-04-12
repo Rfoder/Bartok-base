@@ -11,7 +11,7 @@ public enum PlayerType {
 
 [System.Serializable]
 
-public class Player{
+public class Player : MonoBehaviour{
 
 	public PlayerType 			type = PlayerType.ai;
 	public int 					playerNum;
@@ -23,8 +23,9 @@ public class Player{
 
 	public CardBartok AddCard(CardBartok eCB) {
 
-		if (hand == null) hand = new List<CardBartok> ();
-
+		if (hand == null) 
+			hand = new List<CardBartok> ();
+	
 		hand.Add (eCB);
 
 		if (type == PlayerType.human) {
@@ -44,13 +45,13 @@ public class Player{
 		eCB.SetSortingLayerName ("10");
 		eCB.eventualSortLayer = handSlotDef.layerName;
 
-		FanHand ();
+		FanHand();
 		return(eCB);
 		}
 
 	public CardBartok RemoveCard(CardBartok cb) {
 		hand.Remove (cb);
-		FanHand ();
+		FanHand();
 		return(cb);
 		}
 
@@ -108,11 +109,16 @@ public class Player{
 			hand[i].eventualSortOrder = i*4;
 				}
 	   }
+
 	public void TakeTurn() {
 		Utils.tr (Utils.RoundToPlaces (Time.time), "Player.TakeTurn");
 
 
-		if (type == PlayerType.human)return;
+		if (type == PlayerType.human) 
+
+		return;
+	
+
 		Bartok.S.phase = TurnPhase.waiting;
 
 		CardBartok cb;
@@ -125,14 +131,15 @@ public class Player{
 				validCards.Add (tCB);
 			}
 		}
+
 		if (validCards.Count == 0) {
 
-			cb = AddCard ( Bartok.S.Draw ());
+			cb = AddCard( Bartok.S.Draw());
 				cb.callbackPlayer = this;
 			return;
 				}
 
-		cb = validCards[ Random.Range (0,validCards.Count) ];
+		cb = validCards[ Random.Range (0,validCards.Count)];
 		RemoveCard(cb);
 		Bartok.S.MoveToTarget(cb);
 		cb.callbackPlayer  = this;
@@ -144,7 +151,7 @@ public class Player{
 		          "Player.CBCallback()", tCB.name, "Player " + playerNum);
 
 		Bartok.S.PassTurn ();
-		}
+		   }
 
 		}
 

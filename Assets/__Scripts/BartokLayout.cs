@@ -49,9 +49,9 @@ public class BartokLayout : MonoBehaviour {
 
 				for (int i=0; i<slotsX.Count; i++) {
 						tSD = new SlotDef (); // Create a new SlotDef instance
-						if (slotsX [i].HasAtt ("type")) {
+						if (slotsX[i].HasAtt ("type")) {
 								// If this <slot> has a type attribute parse it
-								tSD.type = slotsX [i].att ("type");
+								tSD.type = slotsX[i].att ("type");
 						} else {
 								// If not, set its type to "slot"; it's a tableau card
 								tSD.type = "slot";
@@ -61,8 +61,8 @@ public class BartokLayout : MonoBehaviour {
 						tSD.y = float.Parse (slotsX [i].att ("y"));
 						tSD.pos = new Vector3 (tSD.x * multiplier.x, tSD.y * multiplier.y, 0);
 						// This converts the number of the layerID into a text layerName
-						tSD.LayerID = int.Parse (slotsX [i].att ("layer"));
-						tSD.layerName = tSD.LayerID.ToString ();
+						tSD.LayerID = int.Parse (slotsX[i].att ("layer"));
+						tSD.layerName = tSD.LayerID.ToString();
 
 
 						switch (tSD.type) {
@@ -88,7 +88,7 @@ public class BartokLayout : MonoBehaviour {
 								tSD.player = int.Parse (slotsX [i].att ("player"));
 								tSD.player = int.Parse (slotsX [i].att ("rot"));
 								slotDefs.Add (tSD);
-								discardPile = tSD;
+								//discardPile = tSD;
 								break;
 						}
 				}
